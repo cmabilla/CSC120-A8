@@ -24,6 +24,7 @@ public class Library extends Building implements LibraryRequirements {
     /**
      * This is a constructor where all attributes are given a default value
      * Overloading
+     * No parameters or return values available
      */
     public Library (){
       this ("Smith College Library", "Northampton MA", 2, false);
@@ -43,12 +44,9 @@ public class Library extends Building implements LibraryRequirements {
      * @param title which is the book title 
      */
     public void addTitle(String title){
-      //Is there a way to check if its already in the hashtable? Like a contains method?
-      //Nevermind
       if (collection.containsKey(title)){
         System.out.println("Sorry this title is already in the collection");
-      }
-      else{
+      } else {
         collection.put(title, true);
         System.out.println(title + " is now in the collection");
         //this title is now in the collection and it is 'true'
@@ -65,8 +63,7 @@ public class Library extends Building implements LibraryRequirements {
         collection.remove(title);
         //Online tutorial says you only need to provide the key in 'remove'
         return title;
-      }
-      else {
+      } else {
         return ("This title was never in the collection!");
       }
     }
@@ -101,7 +98,7 @@ public class Library extends Building implements LibraryRequirements {
     }
 
     /**
-     * Does the library have a certain book
+     * This method sees if the library has a certain book
      * @param title which is the book title being looked for
      * @return T/F: does the library have this book?
      */
@@ -116,7 +113,7 @@ public class Library extends Building implements LibraryRequirements {
     }
 
     /**
-     * Sees if a certain book is available
+     * Sees if a certain book is available in the library
      * @param title which is the book title being looked for
      * @return T/F: Is the book available?
      */
@@ -127,7 +124,7 @@ public class Library extends Building implements LibraryRequirements {
       //also the if statement is redundant but its assuring
       if (availability == true){
         return true;
-      }else{
+      } else {
         return false;
       }
     }
@@ -145,9 +142,8 @@ public class Library extends Building implements LibraryRequirements {
      * This shows all of the available methods in Library
      */
     public void showOptions() {
-        System.out.println("Available options at " + this.name + ":\n + addTitle(t) \n + removeTitle(t) \n + checkOut(t) \n + returnBook(t)\n + containsTitle(t) \n + isAvailable(t) \n + printCollection() \n ");
-        //I did not add the data types of the parameters since the Building class did not add 'int' before n (the parameter)
-        
+      super.showOptions();
+      System.out.println("Other available options at " + this.name + ":\n + addTitle(t) \n + removeTitle(t) \n + checkOut(t) \n + returnBook(t)\n + containsTitle(t) \n + isAvailable(t) \n + printCollection() \n ");
     }
 
     /**
@@ -158,10 +154,12 @@ public class Library extends Building implements LibraryRequirements {
       if (this.activeFloor == -1) {
           throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
       }
+
       if (floorNum < 1 || floorNum > this.nFloors) {
           throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors +".");
       }
-      if (this.nFloors - floorNum > 1 || floorNum - this.nFloors > 1){
+      
+      if (this.activeFloor - floorNum > 1 || floorNum - this.activeFloor > 1){
         if (this.hasElevator){
           System.out.println("You are now on floor #" + floorNum + " of " + this.name);
           this.activeFloor = floorNum;

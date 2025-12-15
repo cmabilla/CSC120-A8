@@ -8,6 +8,14 @@ public class House extends Building implements HouseRequirements{
   private boolean hasDiningRoom;
   private boolean hasElevator;
 
+  /**
+   * This is the main constructor of a 'House'
+   * @param name
+   * @param address
+   * @param nFloors
+   * @param hasDiningRoom
+   * @param hasElevator
+   */
   public House(String name, String address, int nFloors, boolean hasDiningRoom, boolean hasElevator) {
     super(name, address, nFloors);
     this.hasDiningRoom = hasDiningRoom;
@@ -49,8 +57,7 @@ public class House extends Building implements HouseRequirements{
   public void moveIn(Student s){
     if (residents.contains(s)){
       System.out.println("This Student is already in the house");
-    }
-    else{
+    } else {
       residents.add(s);
       System.out.println("This student has been added to the house");
     }
@@ -59,15 +66,14 @@ public class House extends Building implements HouseRequirements{
   /**
    * This moves a student out of a house 
    * @param s which is a particular student
-   * @return Student which is a certain student
+   * @return Student: a certain student
    */
   public Student moveOut(Student s){
 
     if (residents.contains(s)){
       residents.remove(s);
       return s;
-    }
-    else{
+    } else {
       System.out.println("This person cannot move out since they were never in the house");
       return s;
     }
@@ -82,8 +88,7 @@ public class House extends Building implements HouseRequirements{
     if (residents.contains(s)){
       System.out.println("This student is in this house");
       return true;
-    }
-    else{
+    } else {
       System.out.println("This student is NOT in this house");
       return false;
     }
@@ -109,8 +114,8 @@ public class House extends Building implements HouseRequirements{
    * This prints the methods available in the House class
    */
   public void showOptions() {
-        System.out.println("Available options at " + this.name + ":\n + hasDiningRoom() \n + nResidents() \n + moveIn(s) \n + moveOut(s)\n + isResident(s)");
-        //I did not add the data types of the parameters since the Building class did not add 'int' before n (the parameter)
+    super.showOptions();
+    System.out.println("Other available options at " + this.name + ":\n + hasDiningRoom() \n + nResidents() \n + moveIn(s) \n + moveOut(s)\n + isResident(s)");
   }
 
   /**
@@ -121,10 +126,12 @@ public class House extends Building implements HouseRequirements{
     if (this.activeFloor == -1) {
         throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
     }
+
     if (floorNum < 1 || floorNum > this.nFloors) {
         throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors +".");
     }
-    if (this.nFloors - floorNum > 1 || floorNum - this.nFloors > 1){
+    
+    if (this.activeFloor - floorNum > 1 || floorNum - this.activeFloor > 1){
       if (this.hasElevator){
         System.out.println("You are now on floor #" + floorNum + " of " + this.name);
         this.activeFloor = floorNum;

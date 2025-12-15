@@ -7,7 +7,8 @@ public class Cafe extends Building implements CafeRequirements{
     private int nCups;
 
     /**
-     * This is the modified constructor for a Cafe, where there are automatic values for a cafe
+     * This is the modified constructor for a Cafe, where there are automatic values for a cafe...
+     * It was not clear if I should customize values for the Cafe using parameters or set it myself in the constructor
      * @param name
      * @param address
      * @param nFloors
@@ -58,7 +59,6 @@ public class Cafe extends Building implements CafeRequirements{
         this.nSugarPackets = this.nSugarPackets - nSugarPackets;
         this.nCreams = this.nCreams - nCreams;
         this.nCups = nCups - 1;
-        
     }
 
     /**
@@ -99,8 +99,8 @@ public class Cafe extends Building implements CafeRequirements{
      * @return void
      */
     public void showOptions() {
-        System.out.println("Available options at " + this.name + ":\n + sellCoffee(size, nSugarPackets, nCreams) \n + restock(size, nSugarPackets, nCreams, nCups) \n");
-        //I did not add the data types of the parameters since the Building class did not add 'int' before n (the parameter)
+        super.showOptions();
+        System.out.println("Other available options at " + this.name + ":\n + sellCoffee(size, nSugarPackets, nCreams) \n + restock(size, nSugarPackets, nCreams, nCups) \n");
     }
 
     /**
@@ -112,6 +112,7 @@ public class Cafe extends Building implements CafeRequirements{
         if (this.activeFloor == -1) {
             throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
         }
+        
         if (floorNum != 1) {
             throw new RuntimeException("Invalid floor number. This is only for employees");
         } else {
